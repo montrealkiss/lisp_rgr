@@ -17,3 +17,46 @@
 
 ## Постановка задачі варіанту 5 (21) 
 <p align="center"><img src="variant.png"></p>
+
+## Реалізація програми мовою Common Lisp 
+```lisp
+(defun calc-f (i)
+  (cond
+    ((= i 1) 1.0)
+    ((= i 11) 1.0)
+
+    ((and (>= i 2) (<= i 10))
+     (* (calc-f (- i 1)) 
+        (log i) 
+        8))
+
+    ((and (>= i 12) (<= i 20))
+     (* (calc-f (- i 1)) 
+        (/ (log i) 8.0)))
+
+    (t nil)))
+```
+## Реалізація тестових утиліт і тестових наборів
+```lisp
+ (defun check-calc-f (name input expected)
+  (let ((result (calc-f input))
+        (tolerance 0.001))
+    (if result
+        (format t "~:[FAILED~;passed~]... ~a: Expected ~5$, Got ~5$~%"
+                (< (abs (- result expected)) tolerance)
+                name
+                expected
+                result)
+        (format t "FAILED... ~a: Result is NIL (out of range?)~%" name))))
+```
+### Тестові набори
+```lisp
+
+```
+## Результати тестування програми
+```
+
+```
+## Порівняння результатів з обчисленням іншими програмними засобами або за 
+допомогою калькулятора
+
